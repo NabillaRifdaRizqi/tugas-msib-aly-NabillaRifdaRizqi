@@ -18,7 +18,7 @@ class Produk {
     }
 
     public function getInfoProduk(){
-        $str = "Novel  : {$this->judul} | {$this->getLabel()} (RP. {$this->harga}) - {$this->jmlhal} Halaman.";
+        $str = "{$this->judul}  : {$this->judul} | {$this->getLabel()} (RP. {$this->harga}) - {$this->jmlhal} Halaman.";
         return $str;
     }
 }
