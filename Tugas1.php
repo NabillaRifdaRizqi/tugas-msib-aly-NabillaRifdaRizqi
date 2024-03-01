@@ -1,7 +1,7 @@
 <?php
 
-// Base class Person
-class Person {
+
+class Inisial {
     protected $name;
 
     public function __construct($name) {
@@ -18,8 +18,8 @@ interface Consultable {
     public function consult();
 }
 
-// Class Mahasiswa merupakan turunan dari Person dan mengimplementasi interface Consultable
-class Mahasiswa extends Person implements Consultable {
+// Class Mahasiswa merupakan turunan dari inisial n mengimplementasi interface Consultable
+class Mahasiswa extends Inisial implements Consultable {
     private $nim;
     private $totalSks = 0;
 
@@ -29,7 +29,7 @@ class Mahasiswa extends Person implements Consultable {
     }
 
     public function consult() {
-        return "Mahasiswa " . $this->getName() . " (21040144).";
+        return "Mahasiswa " . $this->getName() . " (21040144) Kelas 6A.";
     }
 
     public function addSks($sks) {
@@ -41,8 +41,8 @@ class Mahasiswa extends Person implements Consultable {
     }
 }
 
-// Class Dosen merupakan turunan dari Person
-class Dosen extends Person {
+// Class Dosen merupakan turunan dari inisial
+class Dosen extends Inisial {
     private $nidn;
 
     public function __construct($name, $nidn) {
@@ -50,7 +50,7 @@ class Dosen extends Person {
         $this->nidn = $nidn;
     }
 
-    public function getNIDN() {
+    public function getNidn() {
         return $this->nidn;
     }
 }
@@ -68,8 +68,8 @@ class SKS {
     }
 }
 
-// Class Mapel merupakan turunan dari Person
-class Mapel extends Person {
+// Class Mapel merupakan turunan dari inisial
+class Mapel extends Inisial {
 
     private $no;
     private $sks;
@@ -134,7 +134,8 @@ $mapel3 = new Mapel(3, "Tugas Akhir", 3, "6", "Disetujui");
 // Menampilkan informasi dalam bentuk tabel
 echo "<table border='1'>";
 echo "<caption><b>Isi Kartu Rencana Studi</b></caption>";
-echo "<caption><b>Tahun Akademik 2023/2024 - Genap</b></caption>";
+echo "<caption><b>DIII Teknik Komputer</b></caption>";
+echo "<caption>Tahun Akademik 2023/2024 - Genap</caption>";
 echo "<tr>
         <th>No</th>
         <th>Nama Mata Kuliah</th>
@@ -150,7 +151,7 @@ echo "</table>";
 // Membuat objek mahasiswa, dosen, mapel, dan kampus
 $mahasiswa = new Mahasiswa("Nabilla Rifda Rizqi", "21040144");
 $dosen = new Dosen("Muhamad Bakhar, M.Kom", "11122233344555");
-$kampus = new Kampus("Politeknik Harapa Bersama");
+$kampus = new Kampus("Politeknik Harapan Bersama");
 
 // Menambahkan SKS ke objek mahasiswa
 $mahasiswa->addSks($mapel1->getSks());
@@ -160,7 +161,7 @@ $mahasiswa->addSks($mapel3->getSks());
 // Menampilkan informasi
 echo "<p>Total SKS : " . $mahasiswa->getTotalSks() . "</p>";
 echo "<p>" . $mahasiswa->consult() . "</p>";
-echo "<p>Dosen Wali: " . $dosen->getName() . " (" . $dosen->getNIDN() . ")</p>";
+echo "<p>Dosen Wali: " . $dosen->getName() . " (" . $dosen->getNidn() . ")</p>";
 echo "<p>" . $kampus->getInfo() . "</p>";
 
 ?>

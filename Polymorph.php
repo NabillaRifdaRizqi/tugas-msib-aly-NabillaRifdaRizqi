@@ -1,74 +1,133 @@
 <?php
 
-/*
-polymorphism : 
-sebuah metod pada suatu interface  di implementasikan berbeda beda pada setiap clid class nya
-dan memiliki banyak bentuk 
-
-# menghitung luas bangun datar 
-- luas persegi
-- luas segitiga
-- luas lingkaran
-*/
-
-interface BangunDatar
+interface Menu
 {
-    public function Luas();
-
+    public function getHarga();
+    public function getLevel();
+    public function getNama();
+    public function getJumlah();
 }
 
-class persegi implements BangunDatar 
+class Makanan implements Menu
 {
-    private $sisi;
+    private $nama;
+    private $level;
+    private $harga;
+    private $jumlah = 1; 
+    
 
-    public function __construct($sisi)
+    public function __construct($nama, $level, $harga)
     {
-        $this->sisi = $sisi;
+        $this->nama = $nama;
+        $this->level= $level;
+        $this->harga = $harga;
     }
 
-    public function luas()
+    public function getNama()
     {
-        return pow($this->sisi, 2);
-    }
-}
-
-class segitiga implements BangunDatar
-{
-    private $alas;
-    private $tinggi;
-
-    public function  __construct($alas, $tinggi)
-    {
-        $this->alas = $alas;
-        $this->tinggi = $tinggi;
+        return $this->nama;
     }
 
-    public function luas()
+    public function getLevel()
     {
-        return (0.5 * ($this->alas * $this->tinggi));
-    }
-}
-
-class lingkaran implements BangunDatar
-{
-    private $jari;
-
-    public function __construct($jari)
-    {
-        $this->jari = $jari;
+        return $this->level;
     }
 
-    public function luas()
+    public function getHarga()
     {
-        return (3.14 *pow ($this->jari, 2));
+        return $this->harga;
+    }
+
+    public function getJumlah()
+    {
+        return $this->jumlah;
+    }
+
+    public function tambahJumlah($jumlah)
+    {
+        $this->jumlah += $jumlah;
     }
 }
 
-$persegi = new Persegi(3);
-echo "Luas Persegi = ".$persegi->luas()."<br>";
+class Minuman implements Menu
+{
+    private $nama;
+    private $level;
+    private $harga;
+    private $jumlah = 1; 
 
-$segitiga = new Segitiga(2,4);
-echo "Luas Segitiga = ".$segitiga->luas()."<br>";
+    public function __construct($nama, $level, $harga)
+    {
+        $this->nama = $nama;
+        $this->level= $level;
+        $this->harga = $harga;
+    }
 
-$lingkaran = new Lingkaran(5);
-echo "Luas Lingkaran = ".$lingkaran->luas()."<br>";
+    public function getNama()
+    {
+        return $this->nama;
+    }
+
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    public function getHarga()
+    {
+        return $this->harga;
+    }
+
+    public function getJumlah()
+    {
+        return $this->jumlah;
+    }
+
+    public function tambahJumlah($jumlah)
+    {
+        $this->jumlah += $jumlah;
+    }
+}
+
+class Transaksi
+{
+    private $menus = [];
+
+    public function tambahMenu(Menu $menu)
+    {
+        $this->menus[] = $menu;
+    }
+
+    public function totalHarga()
+    {
+        $total = 0;
+        foreach ($this->menus as $menu) {
+            $total += $menu->getHarga() * $menu->getJumlah(); 
+        }
+        return $total;
+    }
+
+    public function getRincianHarga()
+    {
+        $rincian = [];
+        foreach ($this->menus as $menu) {
+            $rincian[] = $menu->getNama() . ' (Level ' . $menu->getLevel() . ') : ' . $menu->getHarga() . ' x ' . $menu->getJumlah(); // Menampilkan nama, level, harga per item, dan jumlah item
+        }
+        return $rincian;
+    }
+}
+
+$seblakSo = new Makanan('Seblak Sosis', 4, 15000);
+$seblakSo->tambahJumlah(2); 
+$seblakori = new Makanan('Seblak Original', 2, 10000);
+
+$transaksi = new Transaksi();
+$transaksi->tambahMenu($seblakSo);
+$transaksi->tambahMenu($seblakori);
+
+echo "Rincian Harga: <br>";
+foreach ($transaksi->getRincianHarga() as $rincian) {
+    echo $rincian . "<br>";
+}
+echo "Total Harga: " . $transaksi->totalHarga();
+?>

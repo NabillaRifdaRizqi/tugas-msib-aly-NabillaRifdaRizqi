@@ -10,6 +10,7 @@ class Produk {
         $this->penerbit = $penerbit;
         $this->harga = $harga;
         $this->jmlhal = $jmlhal;
+        
     }
 
     public function getLabel(){
@@ -23,10 +24,17 @@ class Produk {
 }
 
 class Novel extends Produk {
-    // Tidak perlu mendefinisikan ulang properti atau constructor jika tidak ada perubahan
+    // tidak mendefinisak ulang popert krena tidak ada perubahan
+}
+
+class Komik extends Produk {
+    // tidak mendefinisak ulang popert krena tidak ada perubahan
 }
 
 $produk1 = new Novel("Bumi", "Tere Liye", "Gramedia", 85000, 150);
+$produk2 = new Komik("Naruto", "Masashi Kishimoto", "Shueisha", 95000, 200);
 
-// Mencetak informasi produk
+//untuk mencetak info produk
 echo $produk1->getInfoProduk();
+echo "<br>";
+echo $produk2->getInfoProduk();
